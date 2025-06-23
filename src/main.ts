@@ -1,23 +1,17 @@
 import './assets/main.css'
-import { createApp } from 'vue'
 import App from './App.vue'
 
-const app = createApp(App)
+const app = Vue.createApp(App)
 
 import router from './router'
 app.use(router)
 
-import { createPinia } from 'pinia'
+const { createPinia } = Pinia
 const pinia = createPinia()
 app.use(pinia)
 
-import 'vuetify/styles';
-import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
-import { createVuetify } from "vuetify/framework";
+const { createVuetify } = Vuetify
 app.use(createVuetify({
-  components,
-  directives,
   theme: {
     defaultTheme: 'dark'
   },

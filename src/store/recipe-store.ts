@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+const { defineStore } = Pinia;
 import type { Recipe } from "@/types.ts";
 
 export const useRecipeStore = defineStore('recipe', {
