@@ -6,29 +6,33 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vuetify from 'vite-plugin-vuetify'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    vuetify({ autoImport: true }),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+export default defineConfig(({ mode }) => {
+  const isProd = mode === 'prod'
+
+  return {
+    plugins: [
+      vue(),
+      vueJsx(),
+      vuetify({ autoImport: true }),
+    ],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      },
     },
-  },
-  build: {
-    sourcemap: true,
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        format: 'iife',
-        globals: {
-          vue: 'Vue',
-          pinia: 'Pinia',
-          vuetify: 'Vuetify'
+    build: {
+      sourcemap: !isProd,
+      rollupOptions: {
+        external: ['vue'],
+        output: {
+          format: 'iife',
+          globals: {
+            vue: 'Vue',
+            pinia: 'Pinia',
+            vuetify: 'Vuetify'
+          }
         }
       }
-    }
-  },
+    },
+  }
 })
